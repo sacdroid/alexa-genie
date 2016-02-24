@@ -107,14 +107,15 @@ def stop(alexa_request):
 @intent_handler('GetKodiCommandEventIntent')
 def kodicommand(alexa_request):
     number = alexa_request.slots['Number'].get('value') or 1
-    command = alexa_request.slots['Command'].get('value').title()
+    command = alexa_request.slots['Command'].get('value') or 'Info'
+    command = command.title() 
     number = min(int(number),10)
     for i in range(int(number)):
         if command in dir(kodi):
             getattr(kodi, command)();
         mc = cast.media_controller    
-        if command in dir(mc):
-            getattr(mc, command)();
+        if command.lower() in dir(mc):
+            getattr(mc, command.lower())();
     return AlexaResponse('Next?',False)
 
 @intent_handler('GetCECCommandEventIntent')
