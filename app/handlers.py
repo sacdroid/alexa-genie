@@ -100,7 +100,7 @@ def help(alexa_request):
     )
 
 
-@intent_handler('AMAZON.StopIntent')
+@intent_handler('AMAZON.CancelIntent')
 def stop(alexa_request):
     return AlexaResponse('Good Bye')
 
